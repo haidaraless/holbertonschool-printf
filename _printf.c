@@ -32,12 +32,22 @@ if (*ptr == '\0')
 return (-1);
 
 if (*ptr == 'c')
-count += handle_char(args);
+{
+char c = va_arg(args, int);
+count += write(1, &c, 1);
+}
 else if (*ptr == 's')
-count += handle_string(args);
+{
+char *str = va_arg(args, char *);
+if (!str)
+str = "(null)";
+while (*str)
+{
+count += write(1, str, 1);
+str++;
+}
+}
 else if (*ptr == '%')
-count += handle_percent();
-else
 {
 count += write(1, "%", 1);
 }
@@ -50,70 +60,4 @@ count += write(1, ptr, 1);
 
 va_end(args);
 return (count);
-}
-
-/**
- * handle_char - Handles the printing of a character
- * @args: The arguments list
- *
- * Description:
- * This function takes a character from the argument list and prints it to stdout.
- *
- * Return: Number of characters printed (1)
- */
-int handle_char(va_list args)
-{
-char c = va_arg(args, int);
-return (write(1, &c, 1));
-}
-
-/**
- * handle_string - Handles the printing of a string
- * @args: The arguments list
- *
- * Description:
- * This function takes a string from the argument list and prints it to stdout.
- * If the string is NULL, it prints "(null)" instead.
- *
- * Return: Number of characters printed
- */
-int handle_string(va_list args)
-{
-char *str = va_arg(args, char *);
-if (!str)
-str = "(null)";
-return (write_string(str));
-}
-
-/**
- * write_string - Writes a string to stdout
- * @str: The string to be printed
- *
- * Description:
- * This function prints each character of the string one by one to stdout.
- *
- * Return: Total number of characters printed
- */
-int write_string(char *str)
-{
-int count = 0;
-while (*str)
-{
-count += write(1, str, 1);
-str++;
-}
-return (count);
-}
-
-/**
- * handle_percent - Handles the printing of a percent sign
- *
- * Description:
- * This function simply prints the percent sign ("%") to stdout.
- *
- * Return: Number of characters printed (1)
- */
-int handle_percent(void)
-{
-return (write(1, "%", 1));
 }
