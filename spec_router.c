@@ -56,27 +56,27 @@ return (handle_percent());
 else if (*spec == 'd' || *spec == 'i')
 {
 int n = va_arg(args, int);
-return (print_signed int(n));
+return (print_signed(n));
 }
 else if (*spec == 'u')
 {
-int n = va_arg(args, int);
-return (print_unsigned int((unsigned int)n));
+unsigned int n = va_arg(args, unsigned int);
+return (print_unsigned(n));
 }
 else if (*spec == 'x')
 {
-int n = va_arg(args, int);
-return (print_hex((unsigned int)n, 0));
+unsigned int n = va_arg(args, unsigned int);
+return (print_hex(n, 0));
 }
 else if (*spec == 'X')
 {
-int n = va_arg(args, int);
-return (print_hex((unsigned int)n, 1));
+unsigned int n = va_arg(args, unsigned int);
+return (print_hex(n, 1));
 }
 else if (*spec == 'o')
 {
-int n = va_arg(args, int);
-return (print_octal((unsigned int)n));
+unsigned int n = va_arg(args, unsigned int);
+return (print_octal(n));
 }
 write(1, "%", 1);
 return (write(1, spec, 1) + 1);
