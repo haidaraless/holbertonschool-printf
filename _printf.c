@@ -3,40 +3,22 @@
 #include <unistd.h>
 
 /**
- * _printf - Produces output according to a specific format
- * @format: A string containing the format specifiers and text
- *
- * Description:
- * This function processes the format string and calls the appropriate
- * handler functions based on the format specifiers.
- *
- * Return: Total number of characters printed
- */
-int _printf(const char *format, ...)
+* process_format - Handles the format specifiers
+* @format: The format specifier
+* @args: List of arguments
+*
+* Return: Number of characters printed
+*/
+int process_format(const char *format, va_list args)
 {
-va_list args;
 int count = 0;
-const char *ptr;
 
-if (!format)
-return (-1);
-
-va_start(args, format);
-
-for (ptr = format; *ptr != '\0'; ptr++)
-{
-if (*ptr == '%')
-{
-ptr++;
-if (*ptr == '\0')
-return (-1);
-
-if (*ptr == 'c')
+if (*format == 'c')
 {
 char c = va_arg(args, int);
 count += write(1, &c, 1);
 }
-else if (*ptr == 's')
+else if (*format == 's')
 {
 char *str = va_arg(args, char *);
 if (!str)
@@ -47,15 +29,48 @@ count += write(1, str, 1);
 str++;
 }
 }
-else if (*ptr == '%')
+else if (*format == '%')
 {
 count += write(1, "%", 1);
 }
+else
+{
+count += write(1, "%", 1);
+count += write(1, format, 1);
+}
+return (count);
+}
+
+/**
+* _printf - Produces output according to a specific format
+* @format: A string containing the format specifiers and text
+*
+* Return: Total number of characters printed
+*/
+int _printf(const char *format, ...)
+{
+va_list args;
+int count = 0;
+
+if (!format)
+return (-1);
+
+va_start(args, format);
+
+while (*format)
+{
+if (*format == '%')
+{
+format++;
+if (*format == '\0')
+return (-1);
+count += process_format(format, args);
 }
 else
 {
-count += write(1, ptr, 1);
+count += write(1, format, 1);
 }
+format++;
 }
 
 va_end(args);
