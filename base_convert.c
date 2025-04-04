@@ -1,5 +1,7 @@
+#include <stdarg.h>
 #include <unistd.h>
-
+#include <stdlib.h>
+#include <stdint.h>
 
 /**
  * print_hex - Prints a number in hexadecimal

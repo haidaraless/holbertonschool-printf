@@ -49,31 +49,36 @@ int route_specifier(const char *spec, va_list args)
 {
 if (*spec == 'c')
 return (handle_char(args));
-else if (*spec == 's')
+if (*spec == 's')
 return (handle_string(args));
-else if (*spec == '%')
+if (*spec == '%')
 return (handle_percent());
-else if (*spec == 'd' || *spec == 'i')
+if (*spec == 'd' || *spec == 'i')
 {
 int n = va_arg(args, int);
 return (print_signed(n));
 }
-else if (*spec == 'u')
+if (*spec == 'p')
+{
+void *ptr = va_arg(args, void *);
+return (print_pointer(ptr));
+}
+if (*spec == 'u')
 {
 unsigned int n = va_arg(args, unsigned int);
 return (print_unsigned(n));
 }
-else if (*spec == 'x')
+if (*spec == 'x')
 {
 unsigned int n = va_arg(args, unsigned int);
 return (print_hex(n, 0));
 }
-else if (*spec == 'X')
+if (*spec == 'X')
 {
 unsigned int n = va_arg(args, unsigned int);
 return (print_hex(n, 1));
 }
-else if (*spec == 'o')
+if (*spec == 'o')
 {
 unsigned int n = va_arg(args, unsigned int);
 return (print_octal(n));

@@ -9,6 +9,7 @@
  */
 
 #include <stdarg.h>
+#include <stdint.h>
 
 /* Core printf */
 int _printf(const char *format, ...);
@@ -23,5 +24,8 @@ int print_unsigned(unsigned int n);
 /* Base printing */
 int print_hex(unsigned int n, int upper);
 int print_octal(unsigned int n);
+
+/* Pointer printing */
+int print_pointer(void *p);
 
 #endif /* MAIN_H */
