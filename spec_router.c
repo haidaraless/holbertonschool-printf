@@ -63,7 +63,7 @@ if (*spec == 'p')
 void *ptr = va_arg(args, void *);
 return (print_pointer(ptr));
 }
-if (*spec == 'u')
+if (*spec == 'u'e
 {
 unsigned int n = va_arg(args, unsigned int);
 return (print_unsigned(n));

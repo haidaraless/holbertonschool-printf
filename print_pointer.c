@@ -18,7 +18,7 @@ char hex_digits[] = "0123456789abcdef";
 if (p == NULL)
 {
 write(1, "(nil)", 5);
-return 5;
+return (5);
 }
 
 /* Print "0x" prefix */
@@ -29,7 +29,7 @@ count += 2;
 if (addr == 0)
 {
 write(1, "0", 1);
-return count + 1;
+return (count + 1);
 }
 
 /* Convert to hexadecimal */
@@ -46,5 +46,5 @@ write(1, &buffer[--i], 1);
 count++;
 }
 
-return count;
+return (count);
 }
