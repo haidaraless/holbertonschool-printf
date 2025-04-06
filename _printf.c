@@ -23,7 +23,7 @@ while (*format)
 if (*format == '%' && *(format + 1))
 {
 format++;
-count += route_specifier(format, args);
+count += specifier(format, args);
 }
 else
 {
