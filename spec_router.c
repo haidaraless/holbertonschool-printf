@@ -47,6 +47,21 @@ return (write(1, "%", 1));
  */
 int route_specifier(const char *spec, va_list args)
 {
+
+flags_t flags = {0, 0, 0};
+
+/* Parse flags if any */
+while (*spec == '+' || *spec == ' ' || *spec == '#')
+{
+if (*spec == '+')
+flags.plus = 1;
+else if (*spec == ' ')
+flags.space = 1;
+else if (*spec == '#')
+flags.hash = 1;
+spec++;
+}
+
 if (*spec == 'c')
 return (handle_char(args));
 if (*spec == 's')
