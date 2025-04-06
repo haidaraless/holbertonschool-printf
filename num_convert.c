@@ -44,10 +44,10 @@ return (count);
 
 /**
  * print_unsigned - Prints an unsigned number
- * @n: The number to print
+ * @n: The number to print (supports unsigned long)
  * Return: Number of characters printed
  */
-int print_unsigned(unsigned int n)
+int print_unsigned(unsigned long n)
 {
 char temp[20];
 int idx = 0, count = 0;
