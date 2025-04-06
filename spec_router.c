@@ -48,6 +48,10 @@ return (write(1, "%", 1));
 int route_specifier(const char *spec, va_list args)
 {
 flags_t flags = {0, 0, 0};
+char modifier = '\0';
+unsigned int u;
+unsigned long ul;
+long n;
 
 /* Parse flags if any */
 while (*spec == '+' || *spec == ' ' || *spec == '#')
@@ -61,6 +65,13 @@ flags.hash = 1;
 spec++;
 }
 
+/* Parse length modifier */
+if (*spec == 'l' || *spec == 'h')
+{
+modifier = *spec;
+spec++;
+}
+
 if (*spec == 'c')
 return (handle_char(args));
 if (*spec == 's')
@@ -69,33 +80,55 @@ if (*spec == '%')
 return (handle_percent());
 if (*spec == 'd' || *spec == 'i')
 {
-long n = va_arg(args, long);
+if (modifier == 'l')
+n = va_arg(args, long);
+else if (modifier == 'h')
+n = (short)va_arg(args, int);
+else
+n = va_arg(args, int);
 return (print_signed(n, flags));
 }
 if (*spec == 'p')
-{
-void *ptr = va_arg(args, void *);
-return (print_pointer(ptr));
-}
+return (print_pointer(va_arg(args, void *)));
 if (*spec == 'u')
 {
-unsigned int n = va_arg(args, unsigned int);
-return (print_unsigned(n));
+if (modifier == 'l')
+ul = va_arg(args, unsigned long);
+else if (modifier == 'h')
+u = (unsigned short)va_arg(args, int);
+else
+u = va_arg(args, unsigned int);
+return (print_unsigned(modifier == 'l' ? ul : u));
 }
 if (*spec == 'x')
 {
-unsigned int n = va_arg(args, unsigned int);
-return (print_hex(n, 0, flags));
+if (modifier == 'l')
+ul = va_arg(args, unsigned long);
+else if (modifier == 'h')
+u = (unsigned short)va_arg(args, int);
+else
+u = va_arg(args, unsigned int);
+return (print_hex(modifier == 'l' ? ul : u, 0, flags));
 }
 if (*spec == 'X')
 {
-unsigned int n = va_arg(args, unsigned int);
-return (print_hex(n, 1, flags));
+if (modifier == 'l')
+ul = va_arg(args, unsigned long);
+else if (modifier == 'h')
+u = (unsigned short)va_arg(args, int);
+else
+u = va_arg(args, unsigned int);
+return (print_hex(modifier == 'l' ? ul : u, 1, flags));
 }
 if (*spec == 'o')
 {
-unsigned int n = va_arg(args, unsigned int);
-return (print_octal(n, flags));
+if (modifier == 'l')
+ul = va_arg(args, unsigned long);
+else if (modifier == 'h')
+u = (unsigned short)va_arg(args, int);
+else
+u = va_arg(args, unsigned int);
+return (print_octal(modifier == 'l' ? ul : u, flags));
 }
 write(1, "%", 1);
 return (write(1, spec, 1) + 1);
