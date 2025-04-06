@@ -90,6 +90,9 @@ return (print_signed(n, flags));
 }
 if (*spec == 'p')
 return (print_pointer(va_arg(args, void *)));
+if (*spec == 'b')
+unsigned int num = va_arg(args, unsigned int);
+return (print_binary(num));
 if (*spec == 'u')
 {
 if (modifier == 'l')

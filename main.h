@@ -44,4 +44,7 @@ int print_octal(unsigned long n, flags_t flags, length_t length);
 /* Pointer printing */
 int print_pointer(void *p);
 
+/* Binary printing */
+void print_binary(unsigned int num);
+
 #endif /* MAIN_H */
