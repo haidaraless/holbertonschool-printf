@@ -47,7 +47,6 @@ return (write(1, "%", 1));
  */
 int route_specifier(const char *spec, va_list args)
 {
-
 flags_t flags = {0, 0, 0};
 
 /* Parse flags if any */
@@ -96,7 +95,7 @@ return (print_hex(n, 1, flags));
 if (*spec == 'o')
 {
 unsigned int n = va_arg(args, unsigned int);
-return (print_octal(n,flags));
+return (print_octal(n, flags));
 }
 write(1, "%", 1);
 return (write(1, spec, 1) + 1);
