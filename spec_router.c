@@ -69,7 +69,7 @@ if (*spec == '%')
 return (handle_percent());
 if (*spec == 'd' || *spec == 'i')
 {
-int n = va_arg(args, int);
+long n = va_arg(args, long);
 return (print_signed(n, flags));
 }
 if (*spec == 'p')
