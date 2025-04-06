@@ -21,7 +21,6 @@ abs_n = -n;
 else
 {
 abs_n = n;
-/* Handle + or space flags for positive numbers */
 if (flags.plus)
 count += write(1, "+", 1);
 else if (flags.space)
@@ -64,4 +63,46 @@ while (idx--)
 count += write(1, &temp[idx], 1);
 
 return (count);
+}
+
+/**
+ * print_short_signed - Prints a signed short number
+ * @n: The number to print
+ * @flags: Struct containing format flags
+ * Return: Number of characters printed
+ */
+int print_short_signed(short n, flags_t flags)
+{
+return (print_signed((long)n, flags));
+}
+
+/**
+ * print_long_signed - Prints a signed long number
+ * @n: The number to print
+ * @flags: Struct containing format flags
+ * Return: Number of characters printed
+ */
+int print_long_signed(long n, flags_t flags)
+{
+return (print_signed(n, flags));
+}
+
+/**
+ * print_ushort - Prints an unsigned short number
+ * @n: The number to print
+ * Return: Number of characters printed
+ */
+int print_ushort(unsigned short n)
+{
+return (print_unsigned((unsigned long)n));
+}
+
+/**
+ * print_ulong - Prints an unsigned long number
+ * @n: The number to print
+ * Return: Number of characters printed
+ */
+int print_ulong(unsigned long n)
+{
+return (print_unsigned(n));
 }
