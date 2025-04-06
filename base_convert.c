@@ -17,17 +17,17 @@ char temp[20];
 char *digits = upper ? "0123456789ABCDEF" : "0123456789abcdef";
 int i = 0, count = 0;
 
-if (n == 0)
-return (write(1, "0", 1));
-
-/* Add 0x or 0X prefix if hash flag is set */
-if (flags.hash)
+/* Add 0x or 0X prefix only if hash flag is set and number is not zero */
+if (flags.hash && n != 0)
 {
 if (upper)
 count += write(1, "0X", 2);
 else
 count += write(1, "0x", 2);
 }
+
+if (n == 0)
+return (count + write(1, "0", 1));
 
 while (n)
 {
