@@ -11,7 +11,7 @@
  * @flags: Struct containing format flags
  * Return: Characters printed
  */
-int print_hex(unsigned int n, int upper, flags_t flags)
+int print_hex(unsigned long n, int upper, flags_t flags)
 {
 char temp[20];
 char *digits = upper ? "0123456789ABCDEF" : "0123456789abcdef";
@@ -46,7 +46,7 @@ return (count);
  * @flags: Struct containing format flags
  * Return: Characters printed
  */
-int print_octal(unsigned int n, flags_t flags)
+int print_octal(unsigned long n, flags_t flags)
 {
 char temp[20];
 int i = 0, count = 0;
