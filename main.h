@@ -26,12 +26,12 @@ int _printf(const char *format, ...);
 int route_specifier(const char *spec, va_list args);
 
 /* Number printing */
-int print_signed(long n);
+int print_signed(long n, flags_t flags);
 int print_unsigned(unsigned int n);
 
 /* Base printing */
-int print_hex(unsigned int n, int upper);
-int print_octal(unsigned int n);
+int print_hex(unsigned int n, int upper, flags_t flags);
+int print_octal(unsigned int n, flags_t flags);
 
 /* Pointer printing */
 int print_pointer(void *p);
