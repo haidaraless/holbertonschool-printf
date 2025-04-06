@@ -13,10 +13,18 @@
 /* Flags structure for format specifiers */
 typedef struct flags
 {
-int plus;
-int space;
-int hash;
+	int plus;
+	int space;
+	int hash;
 } flags_t;
+
+/* Enum for length modifiers */
+typedef enum length_mod
+{
+	NONE,
+	SHORT,
+	LONG
+} length_t;
 
 /* Core printf */
 int _printf(const char *format, ...);
@@ -25,12 +33,12 @@ int _printf(const char *format, ...);
 int route_specifier(const char *spec, va_list args);
 
 /* Number printing */
-int print_signed(long n, flags_t flags);
-int print_unsigned(unsigned long n);
+int print_signed(long n, flags_t flags, length_t length);
+int print_unsigned(unsigned long n, length_t length);
 
 /* Base printing */
-int print_hex(unsigned long n, int upper, flags_t flags);
-int print_octal(unsigned long n, flags_t flags);
+int print_hex(unsigned long n, int upper, flags_t flags, length_t length);
+int print_octal(unsigned long n, flags_t flags, length_t length);
 
 /* Pointer printing */
 int print_pointer(void *p);
