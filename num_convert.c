@@ -1,12 +1,13 @@
 #include <unistd.h>
-
+#include "main.h"
 
 /**
  * print_signed - Prints a signed number
  * @n: The number to print
+ * @flags: Struct containing format flags
  * Return: Number of characters printed
  */
-int print_signed(long n)
+int print_signed(long n, flags_t flags)
 {
 char temp[20];
 int idx = 0, count = 0;
@@ -18,10 +19,17 @@ count += write(1, "-", 1);
 abs_n = -n;
 }
 else
+{
 abs_n = n;
+/* Handle + or space flags for positive numbers */
+if (flags.plus)
+count += write(1, "+", 1);
+else if (flags.space)
+count += write(1, " ", 1);
+}
 
 if (abs_n == 0)
-return (write(1, "0", 1));
+return (count + write(1, "0", 1));
 
 while (abs_n)
 {
