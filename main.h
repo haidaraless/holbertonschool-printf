@@ -11,6 +11,14 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+/* Flags structure for format specifiers */
+typedef struct flags
+{
+int plus;
+int space;
+int hash;
+} flags_t;
+
 /* Core printf */
 int _printf(const char *format, ...);
 
