@@ -6,12 +6,12 @@
 
 /**
  * print_hex - Prints a number in hexadecimal
- * @n: The number
+ * @n: The number // [MODIFIED: type changed to unsigned long]
  * @upper: 1 for uppercase, 0 for lowercase
  * @flags: Struct containing format flags
  * Return: Characters printed
  */
-int print_hex(unsigned long n, int upper, flags_t flags)
+int print_hex(unsigned long n, int upper, flags_t flags) // [MODIFIED: unsigned int -> unsigned long]
 {
 char temp[20];
 char *digits = upper ? "0123456789ABCDEF" : "0123456789abcdef";
@@ -42,11 +42,11 @@ return (count);
 
 /**
  * print_octal - Prints a number in octal
- * @n: The number
+ * @n: The number // [MODIFIED: type changed to unsigned long]
  * @flags: Struct containing format flags
  * Return: Characters printed
  */
-int print_octal(unsigned long n, flags_t flags)
+int print_octal(unsigned long n, flags_t flags) // [MODIFIED: unsigned int -> unsigned long]
 {
 char temp[20];
 int i = 0, count = 0;
