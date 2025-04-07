@@ -8,19 +8,19 @@
 */
 int print_unsigned(unsigned int n)
 {
-char temp[20];
-unsigned int idx = 0, count = 0;
+	char temp[20];
+	unsigned int idx = 0, count = 0;
 
-if (n == 0)
-return (write(1, "0", 1));
+	if (n == 0)
+		return (write(1, "0", 1));
 
-while (n)
-{
-temp[idx++] = (n % 10) + '0';
-n /= 10;
-}
-while (idx--)
-count += write(1, &temp[idx], 1);
+	while (n)
+	{
+		temp[idx++] = (n % 10) + '0';
+		n /= 10;
+	}
+	while (idx--)
+		count += write(1, &temp[idx], 1);
 
-return (count);
+	return (count);
 }

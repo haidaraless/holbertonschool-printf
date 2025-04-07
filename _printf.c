@@ -10,28 +10,28 @@
  */
 int _printf(const char *format, ...)
 {
-va_list args;
-int count = 0;
+	va_list args;
+	int count = 0;
 
-if (!format)
-return (-1);
+	if (!format)
+		return (-1);
 
-va_start(args, format);
+	va_start(args, format);
 
-while (*format)
-{
-if (*format == '%' && *(format + 1))
-{
-format++;
-count += specifier(format, args);
-}
-else
-{
-count += write(1, format, 1);
-}
-format++;
-}
+	while (*format)
+	{
+		if (*format == '%' && *(format + 1))
+		{
+			format++;
+			count += specifier(format, args);
+		}
+		else
+		{
+			count += write(1, format, 1);
+		}
+		format++;
+	}
 
-va_end(args);
-return (count);
+	va_end(args);
+	return (count);
 }

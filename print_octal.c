@@ -8,19 +8,19 @@
 */
 int print_octal(unsigned int n)
 {
-char temp[20];
-int i = 0, count = 0;
+	char temp[20];
+	int i = 0, count = 0;
 
-if (n == 0)
-return (write(1, "0", 1));
+	if (n == 0)
+		return (write(1, "0", 1));
 
-while (n)
-{
-temp[i++] = (n % 8) + '0';
-n /= 8;
-}
-while (i--)
-count += write(1, &temp[i], 1);
+	while (n)
+	{
+		temp[i++] = (n % 8) + '0';
+		n /= 8;
+	}
+	while (i--)
+	count += write(1, &temp[i], 1);
 
-return (count);
+	return (count);
 }
